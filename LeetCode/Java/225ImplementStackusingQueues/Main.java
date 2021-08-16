@@ -41,5 +41,43 @@ package LeetCode225ImplementStackusingQueues;
 //        Follow-up: Can you implement the stack such that each operation is amortized O(1) time complexity? In other words, performing n operations will take overall O(n) time even if one of those operations may take longer. You can use more than two queues.
 
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Main {
+    public static void main(String[] args) {
+
+    }
+}
+
+class MyStack {
+    /** Initialize your data structure here. */
+    Queue<Integer> q = new LinkedList<Integer>();
+    public MyStack() {
+
+    }
+    /** Push element x onto stack. */
+    public void push(int x) {
+        Queue<Integer> newq = new LinkedList<>();
+        newq.add(x);
+        while (q.size() > 0) {
+            newq.add(q.poll());
+        }
+        q = newq;
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        return q.poll();
+    }
+
+    /** Get the top element. */
+    public int top() {
+        return q.peek();
+    }
+
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return q.size() == 0;
+    }
 }
