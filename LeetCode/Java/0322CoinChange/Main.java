@@ -17,6 +17,7 @@ public class Main {
         System.out.println(Solution.coinChange(arr5, 27));
         int[] arr6 = {186, 419, 83, 408};
         System.out.println(Solution.coinChange(arr6, 6249));
+        System.out.println(Solution.coinChange(arr1, 3));
 
 
     }
@@ -25,20 +26,36 @@ public class Main {
 class Solution {
     public static int coinChange(int[] coins, int amount) {
         int[] mins = new int[amount + 1];
-        for (int i = 1; i <= amount; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < coins.length; j++) {
-                if (i - coins[j] >= 0 && mins[i - coins[j]] != Integer.MAX_VALUE) {
-                    min = Math.min(min, mins[i - coins[j]] + 1);
-                }
-            }
-            mins[i] = min;
+
+        for (int i = 1; i < mins.length; i++) {
+            mins[i] = amount + 1;
+            for (int coin : coins)
+                if (i - coin >= 0)
+                    mins[i] = Math.min(mins[i - coin] + 1, mins[i]);
         }
-        if (mins[amount] == Integer.MAX_VALUE)
-            return -1;
-        return mins[amount];
+
+        return (mins[mins.length - 1] > amount ? -1 : mins[mins.length - 1]);
     }
 }
+
+// slightly faster and less memory
+// class Solution {
+//     public static int coinChange(int[] coins, int amount) {
+//         int[] mins = new int[amount + 1];
+//         for (int i = 1; i <= amount; i++) {
+//             int min = Integer.MAX_VALUE;
+//             for (int j = 0; j < coins.length; j++) {
+//                 if (i - coins[j] >= 0 && mins[i - coins[j]] != Integer.MAX_VALUE) {
+//                     min = Math.min(min, mins[i - coins[j]] + 1);
+//                 }
+//             }
+//             mins[i] = min;
+//         }
+//         if (mins[amount] == Integer.MAX_VALUE)
+//             return -1;
+//         return mins[amount];
+//     }
+// }
 
 // this doesn't work.
 //class Solution {
