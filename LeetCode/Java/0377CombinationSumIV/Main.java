@@ -8,15 +8,12 @@ public class Main {
 class Solution {
     public static int combinationSum4(int[] nums, int target) {
         int[] coms = new int[target + 1];
-
         coms[0] = 1;
-        for (int i = 1; i < coms.length; i++) {
-            for (int num : nums) {
-                if (i - num >= 0) {
+        
+        for (int i = 1; i < coms.length; i++)
+            for (int num : nums)
+                if (i - num >= 0)
                     coms[i] += coms[i - num];
-                }
-            }
-        }
         return coms[target];
     }
 }
