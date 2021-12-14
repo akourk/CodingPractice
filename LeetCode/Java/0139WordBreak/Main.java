@@ -1,12 +1,10 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         String s1 = "leetcode";
-        List<String> l1 = new ArrayList();
+        List<String> l1 = new ArrayList<String>();
         l1.add("leet");
         l1.add("code");
         System.out.println("true:" + Solution.wordBreak(s1, l1));
@@ -21,8 +19,9 @@ class Solution {
 
         for (int i = s.length(); i >= 0; i--) {
             for (String word : wordDict) {
-                if (i + word.length() - 1 <= s.length() - 1 
-                && s.substring(i, i + word.length()).equals(word))
+                if (i + word.length() - 1 <= s.length() - 1 && 
+                    s.substring(i, i + word.length()).equals(word))
+
                     dp[i] = dp[i + word.length()];
                 if (dp[i])
                     break;
