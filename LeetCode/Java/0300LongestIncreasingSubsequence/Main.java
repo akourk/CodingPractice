@@ -1,3 +1,4 @@
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
@@ -5,8 +6,6 @@ public class Main {
         int[] nums1 = {0, 1, 0 , 3, 2, 3};
         System.out.println("4:" + Solution.lengthOfLIS(nums0));
         System.out.println("4:" + Solution.lengthOfLIS(nums1));
-
-
     }
 }
 
