@@ -13,6 +13,61 @@ class Main {
     }
 }
 
+
+class Solution {
+    public static List<List<Integer>> pacificAtlantic(int[][] heights) {
+        List<List<Integer>> res = new ArrayList<>();
+        final int m = heights.length;
+        final int n = heights[0].length;
+        boolean[][] seenPac = new boolean[m][n];
+        boolean[][] seenAtl = new boolean[m][n];
+        
+        // m = rows (y-axis)
+        // n = columns (x-axis)
+
+        
+        for (int i = 0; i < m; i++) {
+
+            // run dfs down the left (pacific) column
+            dfs(heights, i, 0, 0, seenPac);
+
+            // run dfs down the right (atlantic) column
+            dfs(heights, i, n - 1, 0, seenAtl);
+        }
+
+        for (int i = 0; i < n; i++) {
+
+            // run dfs across the top (pacific) row
+            dfs(heights, 0, i, 0, seenPac);
+
+            // run dfs across the bottom (atlantic) row
+            dfs(heights, m - 1, i, 0, seenAtl);
+        }
+
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (seenPac[i][j] && seenAtl[i][j])
+                    res.add(new ArrayList<>(Arrays.asList(i, j)));
+
+        return res;
+    }
+
+    private static void dfs(int[][] heights, int i, int j, int h, boolean[][] seen) {
+        if (i < 0 || i >= heights.length || j < 0 || j >= heights[0].length)
+            return;
+        if (seen[i][j] || heights[i][j] < h)
+            return;
+
+        seen[i][j] = true;
+        
+        dfs(heights, i + 1, j, heights[i][j], seen);
+        dfs(heights, i - 1, j, heights[i][j], seen);
+        dfs(heights, i, j + 1, heights[i][j], seen);
+        dfs(heights, i, j - 1, heights[i][j], seen);
+    }
+}
+
+/*
 class Solution {
     public static List<List<Integer>> pacificAtlantic(int[][] heights) {
         final int m = heights.length;
@@ -55,3 +110,6 @@ class Solution {
 
     }
 }
+
+
+*/
