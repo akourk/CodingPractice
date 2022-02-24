@@ -53,9 +53,13 @@ class Solution {
         ArrayList<int[]> al = new ArrayList<>();
         int i = 0;
 
+        // case 1: end of existing interval is less than beginning of new interval
+        // just add existing intervals to list
         while (i < intervals.length && intervals[i][1] < newInterval[0])
             al.add(intervals[i++]);
         
+        // case 2: beginning of existing interval is less than or equal to new interval
+        // and end of existing interval is NOT less than beginning of new interval
         while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
             newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
             newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
@@ -64,6 +68,7 @@ class Solution {
 
         al.add(newInterval);
 
+        // add remainder of existing intervals after insertion
         while (i < intervals.length)
             al.add(intervals[i++]);
     
