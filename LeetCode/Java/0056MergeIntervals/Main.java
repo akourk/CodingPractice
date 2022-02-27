@@ -32,7 +32,6 @@ class Solution {
         mergedIntervals.add(currentInterval);
 
         for (int[] interval: intervals) {
-            // int currentStart = currentInterval[0];
             int currentEnd = currentInterval[1];
             int newStart = interval[0];
             int newEnd = interval[1];
