@@ -7,6 +7,7 @@ class Main {
 
         // a + b + c = 1000
         int c = Integer.MAX_VALUE;
+        
         for (int a = 332; a > 3; a--) {
             for (int b = a + 1; b < c; b++) {
                 c = 1000 - a - b;

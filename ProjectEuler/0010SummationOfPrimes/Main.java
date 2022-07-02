@@ -1,17 +1,14 @@
 class Main {
     public static void main(String[] args) {
+        long x = 3L;
+        long sum = 2L;
 
-        int count = 0;
-        long i = 2L;
-        // 104743
-        while (count < 10001) {
-            if (isPrimeLong(i)) {
-                count++;
-                System.out.println(i + " " + count);
-                i += 2;
-            } else {
-                i++;
+        while (x < 100) {
+            if (isPrimeLong(x)) {
+                sum += x;
+                System.out.println(x + " :" + sum);
             }
+            x += 2;
         }
     }
     // private static boolean isPrimeLong(long x) {
@@ -22,7 +19,16 @@ class Main {
     //     return true;
     // }
 
-    // more efficient method (explained in comments of problem 0010SummationOfPrimes):
+    // much faster isPrime method:
+
+    // explanation:
+    // 1 is not prime
+    // all primes except 2 are odd
+    // all primes greater than 3 can be written in the form 6k +/- 1
+    // any number n can have only 1 prime factor greater than sqrt(n)
+    // the consequence for primality testing of a number n is:
+    //  if we cannot find a number f less <= sqrt(n) that divides n then n is prime:
+    // the only primefactor of n is n itself.
     private static boolean isPrimeLong(long n) {
         long r, f;
         if (n == 1)
