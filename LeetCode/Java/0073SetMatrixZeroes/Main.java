@@ -33,9 +33,6 @@ class Solution {
                     columns.add(j);
                 }
 
-        for (int x : columns)
-                System.out.println(x);
-
         for (int i = 0; i < matrix.length; i++)
             for (int j = 0; j < matrix[i].length; j++)
                 if (rows.contains(i) || columns.contains(j))
