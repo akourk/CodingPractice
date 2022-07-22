@@ -25,6 +25,7 @@ class Main {
     }
 }
 
+
 class Solution {
     public static List<String> letterCombinations(String digits) {
         List<String> list = new ArrayList<>();
@@ -103,3 +104,62 @@ class Solution {
 }
 
 
+// well, it turns out calling a switch statement is quite a bit faster than making a string array,
+// and a little bit less memory.
+// even though the switch statement doesn't look as nice, it performs better in both space and time complexity.
+/*
+class Solution {
+    public static List<String> letterCombinations(String digits) {
+        List<String> list = new ArrayList<>();
+        String[] map = new String[] {"", "", "abc", "def", 
+        "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+        if (digits.length() >= 1) {
+            int nums = 1;
+            for (int i = 0; i < digits.length(); i++)
+                if (digits.charAt(i) == '7' || digits.charAt(i) == '9')
+                    nums *= 4;
+                else
+                    nums *= 3;
+
+            String a = map[digits.charAt(0) - '0'];
+            for (int i = 0; i < nums; i++) {
+                list.add(Character.toString(a.charAt(i % a.length())));
+            }
+
+            if (digits.length() >= 2) {
+                Collections.sort(list);
+                a = map[digits.charAt(1) - '0'];
+                for (int i = 0; i < nums; i++) {
+                    StringBuilder s = new StringBuilder(list.get(i));
+                    s.append(a.charAt(i % a.length()));
+                    list.set(i, s.toString());
+                }
+
+                if (digits.length() >= 3) {
+                    Collections.sort(list);
+                    a = map[digits.charAt(2) - '0'];
+                    for (int i = 0; i < nums; i++) {
+                        StringBuilder s = new StringBuilder(list.get(i));
+                        s.append(a.charAt(i % a.length()));
+                        list.set(i, s.toString());
+                    }
+
+                    if (digits.length() >= 4) {
+                        Collections.sort(list);
+                        a = map[digits.charAt(3) - '0'];
+                        for (int i = 0; i < nums; i++) {
+                            StringBuilder s = new StringBuilder(list.get(i));
+                            s.append(a.charAt(i % a.length()));
+                            list.set(i, s.toString());
+                        }
+                    }
+                }
+            }
+        }
+
+        return list;
+    }
+}
+
+*/
